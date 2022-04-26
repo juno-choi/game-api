@@ -1,8 +1,8 @@
 
 package com.juno.gameapi.webclient_config;
 
-import com.juno.gameapi.api.ClientError;
-import com.juno.gameapi.api.ServerError;
+import com.juno.gameapi.exception.api.ClientError;
+import com.juno.gameapi.exception.api.ServerError;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

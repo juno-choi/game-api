@@ -1,4 +1,4 @@
-package com.juno.gameapi.api;
+package com.juno.gameapi.exception.api;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

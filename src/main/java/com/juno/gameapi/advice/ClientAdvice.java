@@ -1,7 +1,7 @@
 package com.juno.gameapi.advice;
 
-import com.juno.gameapi.api.ClientError;
-import com.juno.gameapi.api.ServerError;
+import com.juno.gameapi.exception.api.ClientError;
+import com.juno.gameapi.exception.api.ServerError;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
