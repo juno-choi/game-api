@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -28,8 +29,8 @@ public class MemberController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody RequestLogin requestLogin, HttpServletResponse response){
-        ResponseEntity<String> responseEntity = memberService.login(requestLogin, response);
+    public ResponseEntity<String> login(@RequestBody RequestLogin requestLogin, HttpServletRequest request, HttpServletResponse response){
+        ResponseEntity<String> responseEntity = memberService.login(requestLogin, request, response);
         return ResponseEntity.status(responseEntity.getStatusCode()).contentType(MediaType.APPLICATION_JSON).body(responseEntity.getBody());
     }
 }
