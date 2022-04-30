@@ -20,7 +20,7 @@ spring:
 
 logging:
   level:
-    root: debug
+    com.juno.gameapi: debug
 
 client:
   url: ${server_url:http://127.0.0.1:8081}
