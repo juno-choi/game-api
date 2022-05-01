@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juno.gameapi.service.dto.JwtToken;
 import com.juno.gameapi.controller.dto.RequestLogin;
 import com.juno.gameapi.controller.dto.RequestMember;
+import com.juno.gameapi.service.dto.ResponseLogin;
 import com.juno.gameapi.webclient_config.WebClientConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public ResponseEntity<String> login(RequestLogin requestLogin, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<ResponseLogin> login(RequestLogin requestLogin, HttpServletRequest request, HttpServletResponse response) {
         ResponseEntity<String> result = webClient.webClient().post()  //get 요청
                 .uri("/login-service/game/login")    //요청 uri
                 .body(Mono.just(requestLogin), RequestLogin.class)
@@ -46,11 +47,14 @@ public class MemberServiceImpl implements MemberService{
 
         //token parse
         String body = result.getBody();
+        ResponseLogin login = null;
         try {
             JwtToken token = new ObjectMapper().readValue(body, JwtToken.class);
+            login = token.getUser();
+
             String accessToken = token.getAccess_token();
             String refreshToken = token.getRefresh_token();
-            String userId = requestLogin.getUserId();
+            String userId = login.getUser_id();
 
             log.debug("accessToken = {}", accessToken);
             log.debug("refreshToken = {}", refreshToken);
@@ -85,6 +89,6 @@ public class MemberServiceImpl implements MemberService{
             log.error(e.getMessage());
         }
 
-        return result;
+        return ResponseEntity.ok(login);
     }
 }
