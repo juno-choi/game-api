@@ -1,7 +1,6 @@
 package com.juno.gameapi.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.juno.gameapi.controller.dto.RequestLogin;
 import com.juno.gameapi.exception.api.ClientError;
 import com.juno.gameapi.service.dto.JwtToken;
 import com.juno.gameapi.webclient_config.WebClientConfig;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import reactor.core.publisher.Mono;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +30,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         log.info("Token Interceptor 실행");
+        log.info("요청 url = {}", request.getRequestURL());
 
         //session 가져오기
         HttpSession session = request.getSession(false);

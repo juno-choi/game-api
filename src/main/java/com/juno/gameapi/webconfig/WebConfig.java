@@ -25,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new TokenInterceptor(webClientConfig))
                 .order(2)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/api/member/login", "/api/member/join")
+                .excludePathPatterns("/", "/api/member/login", "/api/member/join", "/api/google/places", "/error")
                 ;
     }
 }
